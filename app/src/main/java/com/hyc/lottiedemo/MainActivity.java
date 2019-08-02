@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
   private LottieAnimationView lottieAnimationView;
   private SeekBar seekBar;
   private ImageView ivPlay;
+  private SeekBar sbSpeed;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void initView() {
+    sbSpeed = findViewById(R.id.sb_speed);
     ivPlay = findViewById(R.id.iv_play);
     lottieAnimationView = findViewById(R.id.lav);
     lottieAnimationView.useHardwareAcceleration();
@@ -147,6 +149,25 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void initListener() {
+    sbSpeed.setProgress(25);
+    sbSpeed.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+      @Override
+      public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        lottieAnimationView.setSpeed(1.0f*progress/25);
+      }
+
+      @Override
+      public void onStartTrackingTouch(SeekBar seekBar) {
+
+      }
+
+      @Override
+      public void onStopTrackingTouch(SeekBar seekBar) {
+
+      }
+    });
+
+
     lottieAnimationView.addAnimatorUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
       @Override
       public void onAnimationUpdate(ValueAnimator animation) {
